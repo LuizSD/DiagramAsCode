@@ -4,8 +4,6 @@ from diagrams import Cluster, Diagram
 from diagrams.azure.web import AppServices
 from diagrams.azure.database import SQLDatabases
 from diagrams.azure.web import APIConnections
-from diagrams.aws.network import ELB
-from diagrams.aws.network import Route53
 from diagrams.azure.compute import FunctionApps
 
 graph_attr = {
