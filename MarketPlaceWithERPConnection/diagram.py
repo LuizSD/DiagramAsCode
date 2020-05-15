@@ -9,8 +9,7 @@ from diagrams.aws.network import Route53
 from diagrams.azure.compute import FunctionApps
 
 graph_attr = {
-    "fontsize": "45",
-    "bgcolor": "transparent"
+    "fontsize": "45"
 }
 
 react_url = "http://assets.stickpng.com/images/584830f5cef1014c0b5e4aa1.png"
