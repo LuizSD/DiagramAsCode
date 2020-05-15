@@ -8,32 +8,32 @@ from diagrams.aws.network import ELB
 from diagrams.aws.network import Route53
 from diagrams.azure.compute import FunctionApps
 
+graph_attr = {
+    "fontsize": "45",
+    "bgcolor": "transparent"
+}
+
 react_url = "http://assets.stickpng.com/images/584830f5cef1014c0b5e4aa1.png"
 react_icon = "react.png"
 urlretrieve(react_url, react_icon)
 
 
-with Diagram("Marketplace", show=False):
-
-    checkSupplier = FunctionApps("Supplier Connection")
+with Diagram("Marketplace", show=True, graph_attr=graph_attr):
 
     apiSupplier = APIConnections("Supplier Api")
+    sapConnection = APIConnections("Order Creation")
 
-    apiRestFul = [AppServices("ApiRestFul")]
+    with Cluster("Azure"):
+        checkSupplier = FunctionApps("Supplier Api")
+        checkSAPStatus = FunctionApps("Order Status")
+        apiRestFul = AppServices("ApiRestFul")
+        sqlServerDataBase = SQLDatabases("Database")
+        reactFrontend = Custom("WebApp", react_icon) 
+        checkSupplier >> apiRestFul 
+        reactFrontend >> apiRestFul
+        apiRestFul << checkSAPStatus
+        apiRestFul >> sqlServerDataBase
 
-    sqlServerDataBase = SQLDatabases("Database")
-
-    sapConnection = APIConnections("SAP Conection")
-
-    checkSAPStatus = FunctionApps("SAP Status")
-
-    reactFrontend = Custom("WebApp", react_icon)
-
-    
-    reactFrontend >> apiRestFul
-    checkSupplier >> apiRestFul
-    checkSupplier >> apiSupplier 
-    apiRestFul >> sqlServerDataBase
-    apiRestFul >> sapConnection
+    apiSupplier << checkSupplier  
     checkSAPStatus >> sapConnection
-    checkSAPStatus >> apiRestFul
+    apiRestFul >> sapConnection
