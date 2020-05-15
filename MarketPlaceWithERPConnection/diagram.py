@@ -24,7 +24,7 @@ with Diagram("Marketplace", show=True, graph_attr=graph_attr):
     sapConnection = APIConnections("Order Creation")
 
     with Cluster("Azure"):
-        checkSupplier = FunctionApps("Supplier Api")
+        checkSupplier = FunctionApps("Get Products")
         checkSAPStatus = FunctionApps("Order Status")
         apiRestFul = AppServices("ApiRestFul")
         sqlServerDataBase = SQLDatabases("Database")
