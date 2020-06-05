@@ -28,12 +28,12 @@ with Diagram("Cashback", show=True, graph_attr=graph_attr, direction="TB"):
 
     with Cluster("External"):
         agendamentoApi = APIConnections("Agendamento")
-        materaApi = APIConnections("Matera Api")
+        carteiraApi = APIConnections("Pagamento Api")
         cashBackApi = APIConnections("CashBack Api")
     
     reactAppClient >> apiRestFul
     reactAppParnet >> apiRestFul
     apiRestFul << checkSupplier
     checkSupplier >> reactAppClient
-    apiRestFul >> [cashBackApi, materaApi, agendamentoApi]
+    apiRestFul >> [cashBackApi, carteiraApi, agendamentoApi]
     
